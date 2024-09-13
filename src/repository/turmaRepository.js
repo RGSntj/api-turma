@@ -10,8 +10,16 @@ export async function inserirTurma(turma) {
     turma.ano,
     turma.capacidade,
     turma.ativo,
-    turma.inclusao,
   ]);
 
   return resposta[0].insertId;
+}
+
+export async function consultarTurmaPeloAno(ano) {
+  const comando = `SELECT *
+                      FROM tb_turma
+                        WHERE nr_ano_letivo = ?`;
+
+  const registros = await db.query(comando, [ano]);
+  return registros[0];
 }
